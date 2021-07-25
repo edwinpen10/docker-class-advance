@@ -4,6 +4,20 @@ networks:
   web-app:
 
 services:
+  apache:
+    build:
+      context: .
+      dockerfile: apache.Dockerfile
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - web-app
+    ports:
+      - "8082:80"
+    volumes:
+      - ./file-web:/var/www/html
+      
   proxy:
     image: mredw/proxy-custom
     build:
@@ -21,13 +35,10 @@ services:
 
   web:
     image: mredw/web-custom
-    build:
-        context: .
-        dockerfile: Dockerfile
     ports:
       - 8080:80
     volumes:
-      - /file-web:/var/www/html
+      - ./file-web:/var/www/html
     networks:
       - web-app
     healthcheck:
@@ -38,8 +49,6 @@ services:
 
   mysql:
     image: mredw/mysql-custom
-    build:
-        context: .
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -55,9 +64,6 @@ services:
 
   phpmyadmin:
     image: mredw/phpmyadmin-custom
-    build:
-      context: .
-      dockerfile: Dockerfile
     restart: always
     environment:
       PMA_HOST: mysql
@@ -67,6 +73,17 @@ services:
        - 8081:80
     networks:
       - web-app
+
+  php:
+    build:
+      context: .
+      dockerfile: php.Dockerfile
+    volumes:
+      - ./file-web:/var/www/html
+    ports:
+      - "9000:9000"
+    networks:
+      - web-app  
 
 volumes:
   mysql-data:
