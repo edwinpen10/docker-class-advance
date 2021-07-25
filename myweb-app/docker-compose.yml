@@ -7,7 +7,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: httpd.Dockerfile
+      dockerfile: apache.Dockerfile
     depends_on:
       - php
       - mysql
