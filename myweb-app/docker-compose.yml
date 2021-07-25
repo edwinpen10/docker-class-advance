@@ -6,6 +6,7 @@ networks:
 services:
   apache:
     build:
+      context: .
       dockerfile: apache.Dockerfile
     depends_on:
       - php
@@ -20,7 +21,8 @@ services:
   proxy:
     image: nginx:1.19 
     build:
-        dockerfile: nginx.Dockerfile
+      context: .
+      dockerfile: nginx.Dockerfile
     ports:
       - '80:80'
     networks:
@@ -73,6 +75,7 @@ services:
 
   php:
     build:
+      context: .
       dockerfile: php.Dockerfile
     volumes:
       - ./file-web:/var/www/html
