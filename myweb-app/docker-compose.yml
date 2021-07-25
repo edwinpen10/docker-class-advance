@@ -7,7 +7,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: apache.Dockerfile
+      dockerfile: httpd.Dockerfile
     depends_on:
       - php
       - mysql
@@ -37,7 +37,7 @@ services:
         interval: 10s
         timeout: 10s
         retries: 3
-        
+
   mysql:
     image: mysql:5.7
     restart: always
