@@ -1,7 +1,8 @@
 FROM httpd:2.4
 
-RUN apk update; \
-    apk upgrade;
+RUN apt-get update; \
+    apt-get upgrade; \
+    apt-get install apache2;
 
 COPY apache.conf /usr/local/apache2/conf/apache.conf
 RUN echo "Include /usr/local/apache2/conf/apache.conf" \
