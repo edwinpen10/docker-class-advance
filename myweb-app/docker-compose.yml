@@ -46,7 +46,7 @@ services:
       MYSQL_DATABASE: dbkuasai
       MYSQL_USER: cilsykuasaiuser
       MYSQL_PASSWORD: cilsykuasaipassword
-    volume:
+    volumes:
        - mysql-data:var/lib/mysql
     ports:
        - "3306"
