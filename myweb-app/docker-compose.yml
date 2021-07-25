@@ -1,0 +1,70 @@
+version: '3.3'
+
+networks:
+  web-app
+
+services:
+  proxy:
+    image: mredw/proxy-custom
+    build:
+        context: .
+        dockerfile: nginx.Dockerfile
+    ports:
+      - '80:80'
+    networks:
+      - web-app
+    healthcheck:
+        test: ["CMD", "service", "nginx", "status"]
+        interval: 10s
+        timeout: 10s
+        retries: 3
+
+  web:
+    image: mredw/web-custom
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    volumes:
+      - ./file-web:/var/www/web
+    networks:
+      - web-app
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8080"]
+        interval: 10s
+        timeout: 10s
+        retries: 3
+
+  mysql:
+    image: mredw/mysql-custom
+    build:
+        context: .
+        dockerfile: Dockerfile
+    restart: always
+    environment:
+      MYSQL_DATABASE: dbkuasai
+      MYSQL_USER: cilsykuasaiuser
+      MYSQL_PASSWORD: cilsykuasaipassword
+    volume:
+       - mysql-data:var/lib/mysql
+    ports:
+       - "3306"
+    networks:
+       - web-app
+
+  phpmyadmin:
+    image: mredw/phpmyadmin-custom
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      PMA_PASSWORD: cilsykuasaipassword
+    ports:
+       - 8081:80
+    networks:
+      - web-app
+
+volumes:
+  mysql-data:
