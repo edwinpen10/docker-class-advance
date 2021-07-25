@@ -19,7 +19,7 @@ RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
 EXPOSE 80
 
-ENTRYPOINT [ "/usr/sbin/apachectl" ]
+ENTRYPOINT [ "/usr/sbin/apache2" ]
 CMD ["-D", "FOREGROUND"]
 
 
