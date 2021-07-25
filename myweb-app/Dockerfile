@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:7.4-fpm-alpine
 FROM mysql:5.7
 FROM phpmyadmin
 FROM httpd:2.4
