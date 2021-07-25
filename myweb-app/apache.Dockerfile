@@ -6,6 +6,8 @@ RUN apt-get -qq install apache2
 
 #RUN apt-get update -y; \
 #    apt-get upgrade -y;
+VOLUME [ "/var/www/html" ]
+WORKDIR /var/www/html
 
 COPY apache.conf /usr/local/apache2/conf/apache.conf
 ENV APACHE_RUN_USER www-data
