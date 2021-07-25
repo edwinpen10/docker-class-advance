@@ -21,7 +21,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./file-web:/var/www/html
+      - ./file-web:/usr/local/apache2/htdocs/
       
   proxy:
     image: nginx:1.19 
@@ -70,7 +70,7 @@ services:
       context: .
       dockerfile: php.Dockerfile
     volumes:
-      - ./file-web:/var/www/html
+      - ./file-web:/usr/local/apache2/htdocs/
     ports:
       - "9000:9000"
     networks:
