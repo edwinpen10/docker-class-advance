@@ -1,4 +1,4 @@
-#FROM php:7.2-apache
+FROM php:7.2-apache
 FROM ubuntu:18.04
 
 RUN apt-get -qq update
@@ -6,8 +6,6 @@ RUN apt-get -qq install apache2
 
 #RUN apt-get update -y; \
 #    apt-get upgrade -y;
-VOLUME [ "/var/www/html" ]
-WORKDIR /var/www/html
 
 COPY apache.conf /usr/local/apache2/conf/apache.conf
 ENV APACHE_RUN_USER www-data
