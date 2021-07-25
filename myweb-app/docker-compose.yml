@@ -70,7 +70,7 @@ services:
       context: .
       dockerfile: php.Dockerfile
     volumes:
-      - ./file-web:/var/www/
+      - ./file-web:/var/www
     ports:
       - "9000:9000"
     networks:
