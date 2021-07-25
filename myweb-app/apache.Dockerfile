@@ -1,6 +1,6 @@
 #FROM php:7.2-apache
 #FROM ubuntu:18.04
-FROM httpd:2.4
+FROM httpd
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
 
 #RUN apt-get -qq update
