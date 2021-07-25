@@ -31,7 +31,7 @@ services:
     networks:
       - web-app
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8080"]
+        test: ["CMD", "curl", "-f", "http://www.web.local"]
         interval: 10s
         timeout: 10s
         retries: 3
