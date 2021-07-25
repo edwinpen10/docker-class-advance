@@ -1,6 +1,6 @@
 FROM php:7.2-apache
 
-RUN  apt-get updata
+RUN  apt-get update -y
 
 COPY apache.conf /usr/local/apache2/conf/apache.conf
 RUN echo "Include /usr/local/apache2/conf/apache.conf" \
