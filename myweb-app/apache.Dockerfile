@@ -1,7 +1,7 @@
 #FROM php:7.2-apache
 #FROM ubuntu:18.04
 FROM httpd:2.4
-COPY ./apache.conf /usr/local/apache2/conf/httpd.conf
+COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
 
 #RUN apt-get -qq update
 #RUN apt-get -qq install apache2
