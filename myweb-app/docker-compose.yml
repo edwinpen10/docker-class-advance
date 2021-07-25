@@ -40,7 +40,6 @@ services:
     image: mredw/mysql-custom
     build:
         context: .
-        dockerfile: Dockerfile
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
