@@ -3,7 +3,6 @@ RUN apt-get update -y; \
     apt-get upgrade -y;
 
 COPY apache.conf /usr/local/apache2/conf/apache.conf
-y
 
 CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
 
