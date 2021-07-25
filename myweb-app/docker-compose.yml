@@ -27,7 +27,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./file-web:/var/www/web
+      - ./file-web:/var/www/
     networks:
       - web-app
     healthcheck:
