@@ -26,7 +26,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./file-web:/usr/local/apache2/htdocs/
+      - ./file-web:/var/www/
     networks:
       - web-app
     healthcheck:
