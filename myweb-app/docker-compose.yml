@@ -19,7 +19,7 @@ services:
       - ./file-web:/var/www/html
       
   proxy:
-    image: mredw/proxy-custom
+    image: nginx:1.19 
     build:
         context: .
         dockerfile: nginx.Dockerfile
@@ -34,7 +34,6 @@ services:
         retries: 3
 
   web:
-    image: mredw/web-custom
     ports:
       - 8080:80
     volumes:
@@ -48,7 +47,7 @@ services:
         retries: 3
 
   mysql:
-    image: mredw/mysql-custom
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -63,7 +62,7 @@ services:
        - web-app
 
   phpmyadmin:
-    image: mredw/phpmyadmin-custom
+    image: phpmyadmin
     restart: always
     environment:
       PMA_HOST: mysql
