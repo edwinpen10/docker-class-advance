@@ -14,9 +14,6 @@ RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
 EXPOSE 80
 
-ENTRYPOINT [ "/usr/sbin/apache2" ]
-CMD ["-D", "FOREGROUND"]
-
-#CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
 
 
