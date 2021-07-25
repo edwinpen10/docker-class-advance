@@ -27,7 +27,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - /file-web:/usr/local/apache2/htdocs/
+      - /file-web:/var/www/html
     networks:
       - web-app
     healthcheck:
@@ -43,6 +43,7 @@ services:
         dockerfile: Dockerfile
     restart: always
     environment:
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: dbkuasai
       MYSQL_USER: cilsykuasaiuser
       MYSQL_PASSWORD: cilsykuasaipassword
@@ -60,6 +61,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: password
       PMA_PASSWORD: cilsykuasaipassword
     ports:
        - 8081:80
