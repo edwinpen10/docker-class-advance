@@ -47,7 +47,7 @@ services:
       MYSQL_USER: cilsykuasaiuser
       MYSQL_PASSWORD: cilsykuasaipassword
     volumes:
-       - mysql-data:var/lib/mysql
+       - mysql-data:/var/lib/mysql
     ports:
        - "3306"
     networks:
