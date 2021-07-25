@@ -1,9 +1,9 @@
 FROM httpd:2.4.48-alpine
 RUN apk update; \
     apk upgrade;
-
+RUN    chmod 755 config/docker-entrypoint.sh
 COPY apache.conf /usr/local/apache2/conf/apache.conf
 RUN echo "Include /usr/local/apache2/conf/apache.conf" \
     >> /usr/local/apache2/conf/httpd.conf
-
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+    
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
