@@ -1,4 +1,4 @@
-FROM httpd:2.4.33-alpine
+FROM httpd:2.4
 
 RUN apk update; \
     apk upgrade;
