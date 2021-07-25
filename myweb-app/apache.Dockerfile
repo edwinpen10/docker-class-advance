@@ -19,6 +19,7 @@ RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
 EXPOSE 80
 
-CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+ENTRYPOINT [ "/usr/sbin/apachectl" ]
+CMD ["-D", "FOREGROUND"]
 
 
