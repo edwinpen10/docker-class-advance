@@ -11,11 +11,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - mysql
-    healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:80"]
-        interval: 10s
-        timeout: 10s
-        retries: 3
     networks:
       - web-app
     ports:
@@ -23,6 +18,11 @@ services:
     volumes:
       - ./file-web:/var/www/html/
     container_name: web
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
       
   proxy:
     image: nginx:1.19 
