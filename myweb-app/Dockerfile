@@ -26,5 +26,4 @@ RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 EXPOSE 80
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 #CMD ["/etc/init.d/apache2", "start"]
-ENTRYPOINT [ "/usr/sbin/apache2" ]
-CMD ["-D", "FOREGROUND"]
+CMD ["/usr/sbin/apache2","-D", "FOREGROUND"]
