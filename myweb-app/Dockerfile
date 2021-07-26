@@ -4,8 +4,10 @@ RUN apt-get update && apt-get install -y
 
 RUN docker-php-ext-install mysqli pdo_mysql
 
-COPY file-web/* /var/www/
+RUN mkdir /app
 
-RUN cp -r var/www/* /var/www/html/.
+COPY file-web/* /app/
+
+RUN cp -r /app/* /var/www/html/.
 
 #CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
