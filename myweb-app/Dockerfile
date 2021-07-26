@@ -10,9 +10,6 @@ COPY file-web/* /app/
 
 RUN cp -r /app/* /var/www/html/.
 
-
-
-
 CMD ["a2dismod","php7.2"]
 CMD ["a2enmod", "php7.2"]
 #CMD ["systemctl","restart", "apache2"]
@@ -21,4 +18,4 @@ EXPOSE 80
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 CMD ["/etc/init.d/apache2", "start"]
 
-#CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
