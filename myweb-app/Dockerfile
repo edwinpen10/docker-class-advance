@@ -6,4 +6,6 @@ RUN docker-php-ext-install mysqli pdo_mysql
 
 COPY file-web/* /var/www/
 
-CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+RUN cp -r file-web/* /var/www/html/.
+
+#CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
