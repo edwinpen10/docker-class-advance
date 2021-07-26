@@ -19,7 +19,7 @@ services:
     networks:
       - web-app
     ports:
-      - "8080:80"
+      - "80"
     volumes:
       - ./file-web:/var/www/html/
     container_name: web
@@ -65,7 +65,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       PMA_PASSWORD: cilsykuasaipassword
     ports:
-       - 8081:80
+       - "80"
     networks:
       - web-app
     container_name: pma
