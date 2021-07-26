@@ -10,6 +10,11 @@ COPY file-web/* /app/
 
 RUN cp -r /app/* /var/www/html/.
 
-CMD ["/etc/init.d/apache2", "restart"]
 
-CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+CMD ["a2dismod","php7.2"]
+CMD ["a2enmod", "php7.2"]
+CMD ["systemctl","restart", "apache2"]
+
+#CMD ["/etc/init.d/apache2", "restart"]
+
+#CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
