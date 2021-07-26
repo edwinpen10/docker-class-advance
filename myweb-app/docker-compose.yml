@@ -5,6 +5,7 @@ networks:
 
 services:
   web:
+    image: mredw/web:1.0.0
     build:
       context: .
       dockerfile: Dockerfile
