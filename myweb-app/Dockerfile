@@ -10,4 +10,4 @@ COPY file-web/* /app/
 
 RUN cp -r /app/* /var/www/html/.
 
-#CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
