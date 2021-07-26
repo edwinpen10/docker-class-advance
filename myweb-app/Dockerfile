@@ -10,4 +10,7 @@ COPY file-web/* /app/
 
 RUN cp -r /app/* /var/www/html/.
 
+ENV APACHE_RUN_DIR /var/lib/apache/runtime
+RUN mkdir -p ${APACHE_RUN_DIR}
+
 CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
