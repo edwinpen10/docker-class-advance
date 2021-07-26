@@ -7,7 +7,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: apache.Dockerfile
+      dockerfile: Dockerfile
     depends_on:
       - php
       - mysql
@@ -21,7 +21,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./file-web:/usr/local/apache2/htdocs/
+      - ./file-web:/var/www/html/
+    container_name: web
       
   proxy:
     image: nginx:1.19 
@@ -37,6 +38,7 @@ services:
         interval: 10s
         timeout: 10s
         retries: 3
+    container_name: proxy
 
   mysql:
     image: mysql:5.7
@@ -52,29 +54,22 @@ services:
        - "3306"
     networks:
        - web-app
+    container_name: mysql   
 
   phpmyadmin:
     image: phpmyadmin
     restart: always
     environment:
       PMA_HOST: mysql
+      PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: password
       PMA_PASSWORD: cilsykuasaipassword
     ports:
        - 8081:80
     networks:
       - web-app
-
-  php:
-    build:
-      context: .
-      dockerfile: php.Dockerfile
-    volumes:
-      - ./file-web:/usr/local/apache2/htdocs/
-    ports:
-      - "9000:9000"
-    networks:
-      - web-app  
+    container_name: pma
+ 
 
 volumes:
   mysql-data:
