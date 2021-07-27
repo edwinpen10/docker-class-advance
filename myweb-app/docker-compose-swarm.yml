@@ -6,9 +6,6 @@ networks:
 services:
   web:
     image: mredw/web:1.0.0
-    build:
-      context: .
-      dockerfile: Dockerfile
     depends_on:
       - mysql
     networks:
@@ -32,9 +29,6 @@ services:
       
   proxy:
     image: nginx:1.19 
-    build:
-      context: .
-      dockerfile: nginx.Dockerfile
     ports:
       - '80:80'
     networks:
@@ -70,7 +64,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin
-    restart: always
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306

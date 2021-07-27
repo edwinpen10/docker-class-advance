@@ -5,10 +5,7 @@ networks:
 
 services:
   web:
-    image: mredw/web:1.0.0
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: mredw/web-custom
     depends_on:
       - mysql
     networks:
@@ -25,10 +22,7 @@ services:
       retries: 3
       
   proxy:
-    image: nginx:1.19 
-    build:
-      context: .
-      dockerfile: nginx.Dockerfile
+    image: mredw/nginx-custom
     ports:
       - '80:80'
     networks:
@@ -41,7 +35,7 @@ services:
     container_name: proxy
 
   mysql:
-    image: mysql:5.7
+    image: mredw/mysql-custom
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -57,7 +51,7 @@ services:
     container_name: mysql   
 
   phpmyadmin:
-    image: phpmyadmin
+    image: mredw/pma-custom
     restart: always
     environment:
       PMA_HOST: mysql
