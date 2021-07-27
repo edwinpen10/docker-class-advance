@@ -1,0 +1,96 @@
+version: '3.3'
+
+networks:
+  web-app:
+
+services:
+  web:
+    image: mredw/web:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    networks:
+      - web-app
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80"
+    volumes:
+      - ./file-web:/var/www/html/
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      
+  proxy:
+    image: nginx:1.19 
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    ports:
+      - '80:80'
+    networks:
+      - web-app
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+        test: ["CMD", "service", "nginx", "status"]
+        interval: 10s
+        timeout: 10s
+        retries: 3
+    
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: dbkuasai
+      MYSQL_USER: cilsykuasaiuser
+      MYSQL_PASSWORD: cilsykuasaipassword
+    volumes:
+       - mysql-data:/var/lib/mysql
+    ports:
+       - "3306"
+    networks:
+       - web-app
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure 
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: password
+      PMA_PASSWORD: cilsykuasaipassword
+    ports:
+       - "80"
+    networks:
+      - web-app
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    container_name: pma
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+ 
+
+volumes:
+  mysql-data:
