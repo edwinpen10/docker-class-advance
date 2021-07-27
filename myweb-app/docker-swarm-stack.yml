@@ -1,15 +1,15 @@
 version: '3.3'
 
 networks:
-  web-app:
+  web-app-swarm:
 
 services:
   web:
-    image: mredw/web:1.0.0
+    image: mredw/web-custom
     depends_on:
       - mysql
     networks:
-      - web-app
+      - web-app-swarm
     deploy:
       replicas: 1
       update_config:
@@ -28,11 +28,11 @@ services:
       retries: 3
       
   proxy:
-    image: nginx:1.19 
+    image: mredw/proxy-custom 
     ports:
       - '80:80'
     networks:
-      - web-app
+      - web-app-swarm
     deploy:
       replicas: 3
       restart_policy:
@@ -45,7 +45,7 @@ services:
     
 
   mysql:
-    image: mysql:5.7
+    image: mredw/mysql-custom
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: dbkuasai
@@ -56,14 +56,14 @@ services:
     ports:
        - "3306"
     networks:
-       - web-app
+       - web-app-swarm
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure 
 
   phpmyadmin:
-    image: phpmyadmin
+    image: mredw/pma-custom
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
@@ -72,12 +72,11 @@ services:
     ports:
        - "80"
     networks:
-      - web-app
+      - web-app-swarm
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
-    container_name: pma
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 10s
