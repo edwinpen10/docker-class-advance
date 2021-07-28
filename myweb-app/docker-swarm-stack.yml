@@ -39,7 +39,7 @@ services:
         condition: on-failure
     healthcheck:
         test: ["CMD", "service", "nginx", "status"]
-        interval: 10s
+        interval: 20s
         timeout: 10s
         retries: 3
     
