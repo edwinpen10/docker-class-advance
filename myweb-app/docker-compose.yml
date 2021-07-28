@@ -29,7 +29,7 @@ services:
       - web-app
     healthcheck:
         test: ["CMD", "service", "nginx", "status"]
-        interval: 10s
+        interval: 20s
         timeout: 10s
         retries: 3
     container_name: proxy
