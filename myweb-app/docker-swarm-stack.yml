@@ -1,8 +1,5 @@
 version: '3.3'
 
-networks:
-  web-app-swarm:
-
 services:
   web:
     image: mredw/web-custom
@@ -86,3 +83,6 @@ services:
 
 volumes:
   mysql-data:
+networks:
+  web-app-swarm:
+    driver: overlay
