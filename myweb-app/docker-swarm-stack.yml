@@ -62,7 +62,7 @@ services:
       restart_policy:
         condition: on-failure 
 
-  phpmyadmin:
+  pma:
     image: mredw/pma-custom
     environment:
       PMA_HOST: mysql
